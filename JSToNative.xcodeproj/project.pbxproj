@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		513B77E5E7000D584821CB8B /* Pods_JSToNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01483D1B50FA45CA7C61ACA4 /* Pods_JSToNative.framework */; };
+		8F1025B522ACE214006C201B /* JSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025B422ACE214006C201B /* JSManager.swift */; };
+		8F1025C122ACEAEE006C201B /* Resouce in Resources */ = {isa = PBXBuildFile; fileRef = 8F1025C022ACEAEE006C201B /* Resouce */; };
+		8F1025C322ACF345006C201B /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C222ACF345006C201B /* HomeCell.swift */; };
+		8F1025C522ACFCC9006C201B /* BlockUrlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C422ACFCC9006C201B /* BlockUrlController.swift */; };
+		8F1025C922AD1CC8006C201B /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C822AD1CC8006C201B /* TitleNavBar.swift */; };
+		8F1025CC22AD3BD9006C201B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025CB22AD3BD9006C201B /* AlertUtil.swift */; };
 		8F7EBB0322ACD7D1004542A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0222ACD7D1004542A0 /* AppDelegate.swift */; };
-		8F7EBB0522ACD7D1004542A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0422ACD7D1004542A0 /* ViewController.swift */; };
+		8F7EBB0522ACD7D1004542A0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0422ACD7D1004542A0 /* HomeController.swift */; };
 		8F7EBB0822ACD7D1004542A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0622ACD7D1004542A0 /* Main.storyboard */; };
 		8F7EBB0B22ACD7D1004542A0 /* JSToNative.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0922ACD7D1004542A0 /* JSToNative.xcdatamodeld */; };
 		8F7EBB0D22ACD7D2004542A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0C22ACD7D2004542A0 /* Assets.xcassets */; };
@@ -16,9 +23,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01483D1B50FA45CA7C61ACA4 /* Pods_JSToNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSToNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1286242F3B430A6F8C70677E /* Pods-JSToNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSToNative.debug.xcconfig"; path = "Target Support Files/Pods-JSToNative/Pods-JSToNative.debug.xcconfig"; sourceTree = "<group>"; };
+		14E5B14370CC12327310C4A0 /* Pods-JSToNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSToNative.release.xcconfig"; path = "Target Support Files/Pods-JSToNative/Pods-JSToNative.release.xcconfig"; sourceTree = "<group>"; };
+		8F1025B422ACE214006C201B /* JSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSManager.swift; sourceTree = "<group>"; };
+		8F1025C022ACEAEE006C201B /* Resouce */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resouce; sourceTree = "<group>"; };
+		8F1025C222ACF345006C201B /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		8F1025C422ACFCC9006C201B /* BlockUrlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUrlController.swift; sourceTree = "<group>"; };
+		8F1025C822AD1CC8006C201B /* TitleNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNavBar.swift; sourceTree = "<group>"; };
+		8F1025CB22AD3BD9006C201B /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		8F7EBAFF22ACD7D1004542A0 /* JSToNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSToNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F7EBB0222ACD7D1004542A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8F7EBB0422ACD7D1004542A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8F7EBB0422ACD7D1004542A0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8F7EBB0722ACD7D1004542A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F7EBB0A22ACD7D1004542A0 /* JSToNative.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JSToNative.xcdatamodel; sourceTree = "<group>"; };
 		8F7EBB0C22ACD7D2004542A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,17 +47,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				513B77E5E7000D584821CB8B /* Pods_JSToNative.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F1025C622ACFCD3006C201B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8F1025C422ACFCC9006C201B /* BlockUrlController.swift */,
+				8F7EBB0422ACD7D1004542A0 /* HomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8F1025C722ACFCF1006C201B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8F1025C222ACF345006C201B /* HomeCell.swift */,
+				8F1025C822AD1CC8006C201B /* TitleNavBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F1025CA22AD3BC5006C201B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8F1025B422ACE214006C201B /* JSManager.swift */,
+				8F1025CB22AD3BD9006C201B /* AlertUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		8F7EBAF622ACD7D0004542A0 = {
 			isa = PBXGroup;
 			children = (
+				8F1025C022ACEAEE006C201B /* Resouce */,
 				8F7EBB0122ACD7D1004542A0 /* JSToNative */,
 				8F7EBB0022ACD7D1004542A0 /* Products */,
+				C872A4B74E0CC5E460FB5DC9 /* Pods */,
+				FA397695ACF2EF6B1432AD5A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +103,42 @@
 		8F7EBB0122ACD7D1004542A0 /* JSToNative */ = {
 			isa = PBXGroup;
 			children = (
+				8F1025CA22AD3BC5006C201B /* Utils */,
+				8F1025C722ACFCF1006C201B /* View */,
+				8F7EBB1722ACD7E9004542A0 /* Support Files */,
+				8F1025C622ACFCD3006C201B /* Controller */,
+				8F7EBB1122ACD7D2004542A0 /* Info.plist */,
+			);
+			path = JSToNative;
+			sourceTree = "<group>";
+		};
+		8F7EBB1722ACD7E9004542A0 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
 				8F7EBB0222ACD7D1004542A0 /* AppDelegate.swift */,
-				8F7EBB0422ACD7D1004542A0 /* ViewController.swift */,
 				8F7EBB0622ACD7D1004542A0 /* Main.storyboard */,
 				8F7EBB0C22ACD7D2004542A0 /* Assets.xcassets */,
 				8F7EBB0E22ACD7D2004542A0 /* LaunchScreen.storyboard */,
-				8F7EBB1122ACD7D2004542A0 /* Info.plist */,
 				8F7EBB0922ACD7D1004542A0 /* JSToNative.xcdatamodeld */,
 			);
-			path = JSToNative;
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		C872A4B74E0CC5E460FB5DC9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1286242F3B430A6F8C70677E /* Pods-JSToNative.debug.xcconfig */,
+				14E5B14370CC12327310C4A0 /* Pods-JSToNative.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA397695ACF2EF6B1432AD5A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01483D1B50FA45CA7C61ACA4 /* Pods_JSToNative.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F7EBB1422ACD7D2004542A0 /* Build configuration list for PBXNativeTarget "JSToNative" */;
 			buildPhases = (
+				9245C6EF3AEC01E9EB7A81FF /* [CP] Check Pods Manifest.lock */,
 				8F7EBAFB22ACD7D1004542A0 /* Sources */,
 				8F7EBAFC22ACD7D1004542A0 /* Frameworks */,
 				8F7EBAFD22ACD7D1004542A0 /* Resources */,
+				535FB2DB56C7DDA825062CCE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F1025C122ACEAEE006C201B /* Resouce in Resources */,
 				8F7EBB1022ACD7D2004542A0 /* LaunchScreen.storyboard in Resources */,
 				8F7EBB0D22ACD7D2004542A0 /* Assets.xcassets in Resources */,
 				8F7EBB0822ACD7D1004542A0 /* Main.storyboard in Resources */,
@@ -133,14 +210,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		535FB2DB56C7DDA825062CCE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JSToNative/Pods-JSToNative-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JSToNative/Pods-JSToNative-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9245C6EF3AEC01E9EB7A81FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JSToNative-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8F7EBAFB22ACD7D1004542A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F1025CC22AD3BD9006C201B /* AlertUtil.swift in Sources */,
+				8F1025C322ACF345006C201B /* HomeCell.swift in Sources */,
+				8F1025C922AD1CC8006C201B /* TitleNavBar.swift in Sources */,
+				8F1025C522ACFCC9006C201B /* BlockUrlController.swift in Sources */,
 				8F7EBB0B22ACD7D1004542A0 /* JSToNative.xcdatamodeld in Sources */,
-				8F7EBB0522ACD7D1004542A0 /* ViewController.swift in Sources */,
+				8F7EBB0522ACD7D1004542A0 /* HomeController.swift in Sources */,
 				8F7EBB0322ACD7D1004542A0 /* AppDelegate.swift in Sources */,
+				8F1025B522ACE214006C201B /* JSManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +413,7 @@
 		};
 		8F7EBB1522ACD7D2004542A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1286242F3B430A6F8C70677E /* Pods-JSToNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -301,6 +431,7 @@
 		};
 		8F7EBB1622ACD7D2004542A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14E5B14370CC12327310C4A0 /* Pods-JSToNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

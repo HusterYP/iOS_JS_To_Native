@@ -1,0 +1,6 @@
+framework module Pods_JSToNative {
+  umbrella header "Pods-JSToNative-umbrella.h"
+
+  export *
+  module * { export * }
+}
