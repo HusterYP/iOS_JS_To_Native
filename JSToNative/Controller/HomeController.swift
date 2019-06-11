@@ -93,9 +93,11 @@ extension HomeController: UITableViewDelegate {
             let blockUrlVC = BlockUrlController()
             navigationController?.pushViewController(blockUrlVC, animated: true)
         case .JavaScriptCore:
-            break
+            let javaScriptCoreVC = JavaScriptCoreController()
+            navigationController?.pushViewController(javaScriptCoreVC, animated: true)
         case .WKScriptMessageHandler:
-            break
+            let msgHandlerController = MessageHandlerController()
+            navigationController?.pushViewController(msgHandlerController, animated: true)
         case .WebViewJavascriptBridge:
             break
         }

@@ -2,7 +2,7 @@
 <html style="overflow: visible;">
     <style type="text/css">
         div{margin:10px;border:0;padding:0;}
-    </style>
+        </style>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
@@ -35,14 +35,14 @@
         <script type="text/javascript">
             function sendMsg() {
                 var content=document.getElementById("content").value
-                location.href="wxlocal://base.com?content="+content
+                jsCallNative("JS发送给Native",content)
             }
             function acceptMsg(msg) {
                 var content=document.getElementById("native_msg")
                 content.innerHTML=msg
             }
             function sendAndCallback() {
-                location.href="wxlocal://base.com?js_callback=jsCallback"
+                nativeCallJS("成功","jsCallback")
             }
             function jsCallback(msg) {
                 var content=document.getElementById("js_callback_msg")
@@ -51,7 +51,11 @@
             function nativeCallback(msg) {
                 var content=document.getElementById("native_callback")
                 content.innerHTML=msg
-                location.href="wxlocal://base.com?native_callback=jsCallbackNative"
+                // 回调native
+                // 本来回调时，应该是从native传一个callback过来，但是这里为了简化，直接复用之前的JS调用Native的方法
+                // 实际上的情况是应该根据Native传过来的callback，然后作为参数去调用Native的方法，Native再去调用具体的
+                // 回调方法
+                jsCallNative("JS回调Native","成功")
             }
         </script>
     </body>

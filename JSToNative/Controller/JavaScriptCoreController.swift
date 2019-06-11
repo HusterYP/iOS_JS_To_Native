@@ -1,23 +1,24 @@
 //
-//  BlockUrlController.swift
+//  JavaScriptCoreController.swift
 //  JSToNative
 //
-//  Created by yuanping on 2019/6/9.
+//  Created by yuanping on 2019/6/10.
 //  Copyright © 2019 yuanping. All rights reserved.
 //
 
 import UIKit
 import WebKit
-import Foundation
+import JavaScriptCore
 
 /*
- * 拦截Url
- * 适合于UIWebView和WKWebView，这里以WKWebView为例
+ * JavaScriptCore
+ * JavaScriptCore（只适用于UIWebView，iOS7+）
+ * WKWebView不支持JavaScriptCore的方式, 但提供messagehandler的方式为JavaScript与OC通信
+ * 参考: https://www.jianshu.com/p/ac534f508fb0
  */
-class BlockUrlController: UIViewController {
-    private lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero)
-        webView.navigationDelegate = self
+class JavaScriptCoreController: UIViewController {
+    private lazy var webView: UIWebView = {
+        let webView = UIWebView(frame: .zero)
         webView.layer.cornerRadius = 4
         webView.layer.borderColor = UIColor.gray.cgColor
         webView.layer.borderWidth = 1
@@ -33,6 +34,31 @@ class BlockUrlController: UIViewController {
         return textTF
     }()
 
+    // Swift注入Native闭包到JS中
+    private lazy var jsCallNative: @convention(block) (String, String) -> Void = { title, msg in
+        // 默认是WebThread
+        DispatchQueue.main.async {
+            AlertUtil.shared.alert(title: title, msg: msg)
+        }
+    }
+
+    private lazy var nativeCallJS: @convention(block) (String, String) -> Void = { [weak self] msg, callback in
+        DispatchQueue.main.async {
+            AlertUtil.shared.alert(title: "JS发送给Native", msg: msg)
+            self?.context?.evaluateScript("\(callback)('Native回调JS成功')")
+        }
+    }
+
+    private var context: JSContext?
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -45,7 +71,7 @@ class BlockUrlController: UIViewController {
         titleNavBar.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
         }
-        titleNavBar.setTitle(title: "拦截Url")
+        titleNavBar.setTitle(title: "JavaScriptCore")
         titleNavBar.hideBackImage(hide: false)
         titleNavBar.backTapped = ({ [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -58,11 +84,16 @@ class BlockUrlController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-        let htmlPath = Bundle.main.path(forResource: "Resouce/blockurl.html", ofType: nil)
+        let htmlPath = Bundle.main.path(forResource: "Resouce/javascriptcore.html", ofType: nil)
         if let path = htmlPath {
             let htmlUrl = URL(fileURLWithPath: path)
-            webView.loadFileURL(htmlUrl, allowingReadAccessTo: htmlUrl)
+            webView.loadRequest(URLRequest(url: htmlUrl))
         }
+        context = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
+        let jsBlock = unsafeBitCast(jsCallNative, to: AnyObject.self)
+        context?.setObject(jsBlock, forKeyedSubscript: "jsCallNative" as NSCopying & NSObjectProtocol)
+        let nativeBlock = unsafeBitCast(nativeCallJS, to: AnyObject.self)
+        context?.setObject(nativeBlock, forKeyedSubscript: "nativeCallJS" as NSCopying & NSObjectProtocol)
 
         view.addSubview(textTF)
         textTF.snp.makeConstraints { (make) in
@@ -103,58 +134,11 @@ class BlockUrlController: UIViewController {
 
     @objc
     private func sendToJS() {
-        webView.evaluateJavaScript("acceptMsg('\(textTF.text ?? "")')") { (_, error) in
-            if error == nil {
-                AlertUtil.shared.alert(title: "Native To JS", msg: "Complete!")
-            } else {
-                AlertUtil.shared.alert(title: "Native To JS", msg: "\(error.debugDescription)")
-            }
-        }
+        context?.evaluateScript("acceptMsg('\(textTF.text ?? "")')")
     }
 
     @objc
     private func nativeToJSAndCB() {
-        webView.evaluateJavaScript("nativeCallback('收到Native发送给JS消息')")
-    }
-
-    @objc
-    private func jsCallbackNative() {
-        AlertUtil.shared.alert(title: "Native发送给JS并回调Native", msg: "JS回调Native成功")
-    }
-}
-
-extension BlockUrlController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let url = navigationAction.request.url?.absoluteString
-        guard let urlStr = url else { return }
-        if !urlStr.hasPrefix("wxlocal://") {
-            decisionHandler(.allow)
-        } else {
-            decisionHandler(.cancel)
-            let params = DecodeUtil.shared.decodeParamFrom(url: urlStr)
-            if let jsCallback = params["js_callback"] {
-                webView.evaluateJavaScript("\(jsCallback)('Native callback JS成功')") { (_, error) in
-                    if error == nil {
-                        AlertUtil.shared.alert(title: "JS发送给Native并回调JS", msg: "JS调用Native成功!")
-                    } else {
-                        AlertUtil.shared.alert(title: "JS发送给Native并回调JS", msg: "\(error.debugDescription)")
-                    }
-                }
-            } else if let nativeCallback = params["native_callback"] {
-                /* 如何把String转化为Native的函数？
-                 * Swift中respondsToSelector不起作用
-                 * 参见：https://stackoverflow.com/questions/46545431/swift4-respondstoselector-not-working
-                 * 有两种方式：
-                 * 一种是将整个类继承自NSObject，但是Swift不支持多继承，此法一般不行
-                 * 另一种是在对应的需要invoke的方法前面加上@objc
-                 */
-                let selector = NSSelectorFromString(nativeCallback)
-                if self.responds(to: selector) {
-                    self.perform(selector)
-                }
-            } else {
-                AlertUtil.shared.alert(title: "JS To Native", msg: urlStr)
-            }
-        }
+        context?.evaluateScript("nativeCallback('Native发送给JS成功')")
     }
 }

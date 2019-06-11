@@ -14,12 +14,15 @@
 		8F1025C522ACFCC9006C201B /* BlockUrlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C422ACFCC9006C201B /* BlockUrlController.swift */; };
 		8F1025C922AD1CC8006C201B /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C822AD1CC8006C201B /* TitleNavBar.swift */; };
 		8F1025CC22AD3BD9006C201B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025CB22AD3BD9006C201B /* AlertUtil.swift */; };
+		8F48CEF822AE0D4E0042FC63 /* JavaScriptCoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CEF722AE0D4E0042FC63 /* JavaScriptCoreController.swift */; };
+		8F74EBE322AFC18200C33407 /* MessageHandlerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F74EBE222AFC18200C33407 /* MessageHandlerController.swift */; };
 		8F7EBB0322ACD7D1004542A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0222ACD7D1004542A0 /* AppDelegate.swift */; };
 		8F7EBB0522ACD7D1004542A0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0422ACD7D1004542A0 /* HomeController.swift */; };
 		8F7EBB0822ACD7D1004542A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0622ACD7D1004542A0 /* Main.storyboard */; };
 		8F7EBB0B22ACD7D1004542A0 /* JSToNative.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0922ACD7D1004542A0 /* JSToNative.xcdatamodeld */; };
 		8F7EBB0D22ACD7D2004542A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0C22ACD7D2004542A0 /* Assets.xcassets */; };
 		8F7EBB1022ACD7D2004542A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EBB0E22ACD7D2004542A0 /* LaunchScreen.storyboard */; };
+		8FB0C9EB22AE672200ACCDBC /* DecodeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0C9EA22AE672200ACCDBC /* DecodeUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,8 @@
 		8F1025C422ACFCC9006C201B /* BlockUrlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUrlController.swift; sourceTree = "<group>"; };
 		8F1025C822AD1CC8006C201B /* TitleNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNavBar.swift; sourceTree = "<group>"; };
 		8F1025CB22AD3BD9006C201B /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
+		8F48CEF722AE0D4E0042FC63 /* JavaScriptCoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptCoreController.swift; sourceTree = "<group>"; };
+		8F74EBE222AFC18200C33407 /* MessageHandlerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandlerController.swift; sourceTree = "<group>"; };
 		8F7EBAFF22ACD7D1004542A0 /* JSToNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSToNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F7EBB0222ACD7D1004542A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F7EBB0422ACD7D1004542A0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		8F7EBB0C22ACD7D2004542A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F7EBB0F22ACD7D2004542A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F7EBB1122ACD7D2004542A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FB0C9EA22AE672200ACCDBC /* DecodeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,8 @@
 			children = (
 				8F1025C422ACFCC9006C201B /* BlockUrlController.swift */,
 				8F7EBB0422ACD7D1004542A0 /* HomeController.swift */,
+				8F48CEF722AE0D4E0042FC63 /* JavaScriptCoreController.swift */,
+				8F74EBE222AFC18200C33407 /* MessageHandlerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -77,6 +85,7 @@
 			children = (
 				8F1025B422ACE214006C201B /* JSManager.swift */,
 				8F1025CB22AD3BD9006C201B /* AlertUtil.swift */,
+				8FB0C9EA22AE672200ACCDBC /* DecodeUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -263,10 +272,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1025CC22AD3BD9006C201B /* AlertUtil.swift in Sources */,
+				8FB0C9EB22AE672200ACCDBC /* DecodeUtil.swift in Sources */,
+				8F74EBE322AFC18200C33407 /* MessageHandlerController.swift in Sources */,
 				8F1025C322ACF345006C201B /* HomeCell.swift in Sources */,
 				8F1025C922AD1CC8006C201B /* TitleNavBar.swift in Sources */,
 				8F1025C522ACFCC9006C201B /* BlockUrlController.swift in Sources */,
 				8F7EBB0B22ACD7D1004542A0 /* JSToNative.xcdatamodeld in Sources */,
+				8F48CEF822AE0D4E0042FC63 /* JavaScriptCoreController.swift in Sources */,
 				8F7EBB0522ACD7D1004542A0 /* HomeController.swift in Sources */,
 				8F7EBB0322ACD7D1004542A0 /* AppDelegate.swift in Sources */,
 				8F1025B522ACE214006C201B /* JSManager.swift in Sources */,

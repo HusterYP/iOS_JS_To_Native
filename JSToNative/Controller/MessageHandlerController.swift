@@ -1,8 +1,8 @@
 //
-//  BlockUrlController.swift
+//  MessageHandlerController.swift
 //  JSToNative
 //
-//  Created by yuanping on 2019/6/9.
+//  Created by yuanping on 2019/6/11.
 //  Copyright © 2019 yuanping. All rights reserved.
 //
 
@@ -10,11 +10,7 @@ import UIKit
 import WebKit
 import Foundation
 
-/*
- * 拦截Url
- * 适合于UIWebView和WKWebView，这里以WKWebView为例
- */
-class BlockUrlController: UIViewController {
+class MessageHandlerController: UIViewController {
     private lazy var webView: WKWebView = {
         let webView = WKWebView(frame: .zero)
         webView.navigationDelegate = self
@@ -123,7 +119,7 @@ class BlockUrlController: UIViewController {
     }
 }
 
-extension BlockUrlController: WKNavigationDelegate {
+extension MessageHandlerController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let url = navigationAction.request.url?.absoluteString
         guard let urlStr = url else { return }
