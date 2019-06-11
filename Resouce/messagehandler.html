@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html style="overflow: visible;">
+    <style type="text/css">
+        div{margin:10px;border:0;padding:0;}
+        </style>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    </head>
+    <body>
+        <center>
+            <div>发送消息给Native:</div>
+            <div>
+                <input id="content" type="text" style="width:300px; height:20px;"/>
+            </div>
+            <div/>
+            <div>
+                <button onClick="sendMsg()">JS发送给Native</button>
+            </div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>从Native接受到消息:</div>
+            <div id="native_msg"/></div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>
+                <button onClick="sendAndCallback()">JS发送给Native并回调JS</button>
+            </div>
+            <div id="js_callback_msg"/></div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>Native发送给JS并回调Native:</div>
+            <div id="native_callback"/></div>
+        </center>
+        <script type="text/javascript">
+            function sendMsg() {
+                var content=document.getElementById("content").value
+                window.webkit.messageHandlers.sendMsgToNative.postMessage({"content": content})
+            }
+            function acceptMsg(msg) {
+                var content=document.getElementById("native_msg")
+                content.innerHTML=msg
+            }
+            // JS发送给Native并回调JS
+            function sendAndCallback() {
+                window.webkit.messageHandlers.callbackJS.postMessage({"content": "成功", "callback": "jsCallback"})
+            }
+            function jsCallback(msg) {
+                var content=document.getElementById("js_callback_msg")
+                content.innerHTML=msg
+            }
+            function nativeCallback(msg,callback) {
+                var content=document.getElementById("native_callback")
+                content.innerHTML=msg
+                window.webkit.messageHandlers.callbackNative.postMessage({"title": "JS回调Native", "msg": "成功"})
+            }
+        </script>
+    </body>
+</html>
+

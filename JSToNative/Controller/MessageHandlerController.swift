@@ -10,10 +10,16 @@ import UIKit
 import WebKit
 import Foundation
 
+/*
+ * WKScriptMessageHandler（只适用于WKWebView，iOS8+）
+ * 参考：
+ * 1. https://www.jianshu.com/p/c9ceb6a824e2
+ * 2. https://www.jianshu.com/p/433e59c5a9eb
+ */
 class MessageHandlerController: UIViewController {
     private lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero)
-        webView.navigationDelegate = self
+        let configuration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.layer.cornerRadius = 4
         webView.layer.borderColor = UIColor.gray.cgColor
         webView.layer.borderWidth = 1
@@ -34,6 +40,24 @@ class MessageHandlerController: UIViewController {
         setupViews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /*
+         * addScriptMessageHandler 很容易导致循环引用
+         * 控制器 强引用了WKWebView, WKWebView copy(强引用了）configuration, configuration copy （强引用了）userContentController
+         * userContentController 强引用了 self （控制器）
+         */
+        webView.configuration.userContentController.add(self, name: "sendMsgToNative")
+        webView.configuration.userContentController.add(self, name: "callbackJS")
+        webView.configuration.userContentController.add(self, name: "callbackNative")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "sendMsgToNative")
+    }
+
+
     private func setupViews() {
         navigationController?.isNavigationBarHidden = true
         let titleNavBar = TitleNavBar()
@@ -41,7 +65,7 @@ class MessageHandlerController: UIViewController {
         titleNavBar.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
         }
-        titleNavBar.setTitle(title: "拦截Url")
+        titleNavBar.setTitle(title: "WKScriptMessageHandler")
         titleNavBar.hideBackImage(hide: false)
         titleNavBar.backTapped = ({ [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -54,11 +78,12 @@ class MessageHandlerController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-        let htmlPath = Bundle.main.path(forResource: "Resouce/blockurl.html", ofType: nil)
+        let htmlPath = Bundle.main.path(forResource: "Resouce/messagehandler.html", ofType: nil)
         if let path = htmlPath {
             let htmlUrl = URL(fileURLWithPath: path)
             webView.loadFileURL(htmlUrl, allowingReadAccessTo: htmlUrl)
         }
+
 
         view.addSubview(textTF)
         textTF.snp.makeConstraints { (make) in
@@ -100,56 +125,34 @@ class MessageHandlerController: UIViewController {
     @objc
     private func sendToJS() {
         webView.evaluateJavaScript("acceptMsg('\(textTF.text ?? "")')") { (_, error) in
-            if error == nil {
-                AlertUtil.shared.alert(title: "Native To JS", msg: "Complete!")
-            } else {
-                AlertUtil.shared.alert(title: "Native To JS", msg: "\(error.debugDescription)")
+            if error != nil {
+                AlertUtil.shared.alert(title: "Native发送给JS", msg: error.debugDescription)
             }
         }
     }
 
     @objc
     private func nativeToJSAndCB() {
-        webView.evaluateJavaScript("nativeCallback('收到Native发送给JS消息')")
-    }
-
-    @objc
-    private func jsCallbackNative() {
-        AlertUtil.shared.alert(title: "Native发送给JS并回调Native", msg: "JS回调Native成功")
+        webView.evaluateJavaScript("nativeCallback('Native发送给JS成功','callbackNative')", completionHandler: nil)
     }
 }
 
-extension MessageHandlerController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let url = navigationAction.request.url?.absoluteString
-        guard let urlStr = url else { return }
-        if !urlStr.hasPrefix("wxlocal://") {
-            decisionHandler(.allow)
-        } else {
-            decisionHandler(.cancel)
-            let params = DecodeUtil.shared.decodeParamFrom(url: urlStr)
-            if let jsCallback = params["js_callback"] {
-                webView.evaluateJavaScript("\(jsCallback)('Native callback JS成功')") { (_, error) in
-                    if error == nil {
-                        AlertUtil.shared.alert(title: "JS发送给Native并回调JS", msg: "JS调用Native成功!")
-                    } else {
-                        AlertUtil.shared.alert(title: "JS发送给Native并回调JS", msg: "\(error.debugDescription)")
-                    }
+extension MessageHandlerController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "sendMsgToNative" {
+            if let params = message.body as? NSDictionary {
+                AlertUtil.shared.alert(title: "JS发送给Native", msg: (params["content"] as? String) ?? "")
+            }
+        } else if message.name == "callbackJS" {
+            if let params = message.body as? NSDictionary {
+                AlertUtil.shared.alert(title: "JS发送给 Native", msg: (params["content"] as? String) ?? "")
+                if let jsCallback = params["callback"] as? String {
+                    webView.evaluateJavaScript("\(jsCallback)('Native回调JS成功')", completionHandler: nil)
                 }
-            } else if let nativeCallback = params["native_callback"] {
-                /* 如何把String转化为Native的函数？
-                 * Swift中respondsToSelector不起作用
-                 * 参见：https://stackoverflow.com/questions/46545431/swift4-respondstoselector-not-working
-                 * 有两种方式：
-                 * 一种是将整个类继承自NSObject，但是Swift不支持多继承，此法一般不行
-                 * 另一种是在对应的需要invoke的方法前面加上@objc
-                 */
-                let selector = NSSelectorFromString(nativeCallback)
-                if self.responds(to: selector) {
-                    self.perform(selector)
-                }
-            } else {
-                AlertUtil.shared.alert(title: "JS To Native", msg: urlStr)
+            }
+        } else if message.name == "callbackNative" {
+            if let params = message.body as? NSDictionary {
+                AlertUtil.shared.alert(title: params["title"] as? String ?? "", msg: params["msg"] as? String ?? "")
             }
         }
     }
