@@ -101,6 +101,7 @@ class BlockUrlController: UIViewController {
         nativeCallback.addTarget(self, action: #selector(nativeToJSAndCB), for: .touchUpInside)
     }
 
+    /// Native发送给JS，JS不回调Native
     @objc
     private func sendToJS() {
         webView.evaluateJavaScript("acceptMsg('\(textTF.text ?? "")')") { (_, error) in
@@ -112,11 +113,13 @@ class BlockUrlController: UIViewController {
         }
     }
 
+    /// Native发送给JS并回调Native
     @objc
     private func nativeToJSAndCB() {
         webView.evaluateJavaScript("nativeCallback('收到Native发送给JS消息')")
     }
 
+    /// Native发送给JS并回调Native：JS回调Native
     @objc
     private func jsCallbackNative() {
         AlertUtil.shared.alert(title: "Native发送给JS并回调Native", msg: "JS回调Native成功")
@@ -132,6 +135,7 @@ extension BlockUrlController: WKNavigationDelegate {
         } else {
             decisionHandler(.cancel)
             let params = DecodeUtil.shared.decodeParamFrom(url: urlStr)
+            // JS发送给Native并回调JS：Native回调JS
             if let jsCallback = params["js_callback"] {
                 webView.evaluateJavaScript("\(jsCallback)('Native callback JS成功')") { (_, error) in
                     if error == nil {
@@ -148,11 +152,13 @@ extension BlockUrlController: WKNavigationDelegate {
                  * 一种是将整个类继承自NSObject，但是Swift不支持多继承，此法一般不行
                  * 另一种是在对应的需要invoke的方法前面加上@objc
                  */
+                // Native发送给JS并回调Native：JS回调Native
                 let selector = NSSelectorFromString(nativeCallback)
                 if self.responds(to: selector) {
                     self.perform(selector)
                 }
             } else {
+                // JS发送给Native，Native不回调JS
                 AlertUtil.shared.alert(title: "JS To Native", msg: urlStr)
             }
         }

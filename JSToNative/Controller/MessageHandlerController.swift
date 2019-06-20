@@ -122,6 +122,7 @@ class MessageHandlerController: UIViewController {
         nativeCallback.addTarget(self, action: #selector(nativeToJSAndCB), for: .touchUpInside)
     }
 
+    /// Native发送给JS
     @objc
     private func sendToJS() {
         webView.evaluateJavaScript("acceptMsg('\(textTF.text ?? "")')") { (_, error) in
@@ -131,6 +132,7 @@ class MessageHandlerController: UIViewController {
         }
     }
 
+    /// Native发送给JS并回调Native
     @objc
     private func nativeToJSAndCB() {
         webView.evaluateJavaScript("nativeCallback('Native发送给JS成功','callbackNative')", completionHandler: nil)
@@ -139,11 +141,13 @@ class MessageHandlerController: UIViewController {
 
 extension MessageHandlerController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        // JS发送给Native
         if message.name == "sendMsgToNative" {
             if let params = message.body as? NSDictionary {
                 AlertUtil.shared.alert(title: "JS发送给Native", msg: (params["content"] as? String) ?? "")
             }
         } else if message.name == "callbackJS" {
+            // JS发送给Native并回调JS
             if let params = message.body as? NSDictionary {
                 AlertUtil.shared.alert(title: "JS发送给 Native", msg: (params["content"] as? String) ?? "")
                 if let jsCallback = params["callback"] as? String {
@@ -151,6 +155,7 @@ extension MessageHandlerController: WKScriptMessageHandler {
                 }
             }
         } else if message.name == "callbackNative" {
+            // Native发功给JS并回调Native：JS回调Native
             if let params = message.body as? NSDictionary {
                 AlertUtil.shared.alert(title: params["title"] as? String ?? "", msg: params["msg"] as? String ?? "")
             }

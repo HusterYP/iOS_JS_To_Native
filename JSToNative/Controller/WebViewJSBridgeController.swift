@@ -123,11 +123,13 @@ class WebViewJSBridgeController: UIViewController {
         nativeCallback.addTarget(self, action: #selector(nativeToJSAndCB), for: .touchUpInside)
     }
 
+    /// Native发送给JS
     @objc
     private func sendToJS() {
         bridge.callHandler("acceptMsg", data: "\(textTF.text ?? "")")
     }
 
+    /// Native发送给JS并回调Native
     @objc
     private func nativeToJSAndCB() {
         bridge.callHandler("nativeCallback", data: "Native发送给JS成功") {[weak self] (data) in
@@ -135,6 +137,7 @@ class WebViewJSBridgeController: UIViewController {
         }
     }
 
+    /// Native发送给JS并回调Native：JS回调Native
     private func jsCallbackNative(data: String) {
         AlertUtil.shared.alert(title: "JS回调Native", msg: data)
     }

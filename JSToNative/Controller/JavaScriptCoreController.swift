@@ -34,6 +34,7 @@ class JavaScriptCoreController: UIViewController {
         return textTF
     }()
 
+    /// JS发送给Native
     // Swift注入Native闭包到JS中
     private lazy var jsCallNative: @convention(block) (String, String) -> Void = { title, msg in
         // 默认是WebThread
@@ -42,6 +43,7 @@ class JavaScriptCoreController: UIViewController {
         }
     }
 
+    /// JS发送给Native并回调JS：Native收到JS消息并回调JS
     private lazy var nativeCallJS: @convention(block) (String, String) -> Void = { [weak self] msg, callback in
         DispatchQueue.main.async {
             AlertUtil.shared.alert(title: "JS发送给Native", msg: msg)
@@ -132,11 +134,13 @@ class JavaScriptCoreController: UIViewController {
         nativeCallback.addTarget(self, action: #selector(nativeToJSAndCB), for: .touchUpInside)
     }
 
+    /// Native发送给JS，不回调Native
     @objc
     private func sendToJS() {
         context?.evaluateScript("acceptMsg('\(textTF.text ?? "")')")
     }
 
+    /// Native发送给JS并回调Native
     @objc
     private func nativeToJSAndCB() {
         context?.evaluateScript("nativeCallback('Native发送给JS成功')")
