@@ -99,7 +99,8 @@ extension HomeController: UITableViewDelegate {
             let msgHandlerController = MessageHandlerController()
             navigationController?.pushViewController(msgHandlerController, animated: true)
         case .WebViewJavascriptBridge:
-            break
+            let webviewJSBridge = WebViewJSBridgeController()
+            navigationController?.pushViewController(webviewJSBridge, animated: true)
         }
     }
 }

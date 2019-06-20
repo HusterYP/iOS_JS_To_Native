@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html style="overflow: visible;">
+    <style type="text/css">
+        div{margin:10px;border:0;padding:0;}
+        </style>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    </head>
+    <body>
+        <center>
+            <div>发送消息给Native:</div>
+            <div>
+                <input id="content" type="text" style="width:300px; height:20px;"/>
+            </div>
+            <div/>
+            <div>
+                <button onClick="sendMsg()">JS发送给Native</button>
+            </div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>从Native接受到消息:</div>
+            <div id="native_msg"/></div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>
+                <button onClick="sendAndCallback()">JS发送给Native并回调JS</button>
+            </div>
+            <div id="js_callback_msg"/></div>
+            <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+            <div>Native发送给JS并回调Native:</div>
+            <div id="native_callback"/></div>
+        </center>
+        <script type="text/javascript">
+            // 这个函数必须写，用来初始化设置
+            function setupWebViewJavascriptBridge(callback) {
+                if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+                if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+                window.WVJBCallbacks = [callback];
+                var WVJBIframe = document.createElement('iframe');
+                WVJBIframe.style.display = 'none';
+                WVJBIframe.src = 'https://__bridge_loaded__';
+                document.documentElement.appendChild(WVJBIframe);
+                setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+            }
+            //这也是固定的，OC调JS，需要给OC调用的函数必须写在这个函数里面
+            // 上面定义了setupWebViewJavascriptBridge函数之后需要在这里主动调用一次
+            setupWebViewJavascriptBridge(function(bridge) {
+                bridge.registerHandler('acceptMsg', function(data, responseCallback) {
+                    acceptMsg(data)
+                })
+                bridge.registerHandler('nativeCallback', function(data, responseCallback) {
+                    nativeCallback(data)
+                    responseCallback("成功")
+                })
+            })
+            function sendMsg() {
+                var content=document.getElementById("content").value
+                WebViewJavascriptBridge.callHandler('sendToNative', {'content': content}, null)
+            }
+            function acceptMsg(msg) {
+                var content=document.getElementById("native_msg")
+                content.innerHTML=msg
+            }
+            function sendAndCallback() {
+                WebViewJavascriptBridge.callHandler('jsSendToNativeAndCBJs', {'content': "成功"}, jsCallback)
+            }
+            function jsCallback(msg) {
+                var content=document.getElementById("js_callback_msg")
+                content.innerHTML=msg
+            }
+            function nativeCallback(msg) {
+                var content=document.getElementById("native_callback")
+                content.innerHTML=msg
+                location.href="wxlocal://base.com?native_callback=jsCallbackNative"
+            }
+        </script>
+    </body>
+</html>

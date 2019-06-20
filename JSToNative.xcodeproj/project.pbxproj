@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		513B77E5E7000D584821CB8B /* Pods_JSToNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01483D1B50FA45CA7C61ACA4 /* Pods_JSToNative.framework */; };
+		8F077A5F22B787F8002175AC /* WebViewJSBridgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F077A5E22B787F8002175AC /* WebViewJSBridgeController.swift */; };
 		8F1025B522ACE214006C201B /* JSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025B422ACE214006C201B /* JSManager.swift */; };
 		8F1025C122ACEAEE006C201B /* Resouce in Resources */ = {isa = PBXBuildFile; fileRef = 8F1025C022ACEAEE006C201B /* Resouce */; };
 		8F1025C322ACF345006C201B /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1025C222ACF345006C201B /* HomeCell.swift */; };
@@ -29,6 +30,16 @@
 		01483D1B50FA45CA7C61ACA4 /* Pods_JSToNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSToNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1286242F3B430A6F8C70677E /* Pods-JSToNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSToNative.debug.xcconfig"; path = "Target Support Files/Pods-JSToNative/Pods-JSToNative.debug.xcconfig"; sourceTree = "<group>"; };
 		14E5B14370CC12327310C4A0 /* Pods-JSToNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSToNative.release.xcconfig"; path = "Target Support Files/Pods-JSToNative/Pods-JSToNative.release.xcconfig"; sourceTree = "<group>"; };
+		8F077A5222B78452002175AC /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
+		8F077A5322B78452002175AC /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		8F077A5422B78452002175AC /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		8F077A5522B78452002175AC /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
+		8F077A5622B78452002175AC /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
+		8F077A5722B78452002175AC /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
+		8F077A5822B78452002175AC /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		8F077A5922B78452002175AC /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		8F077A5B22B78717002175AC /* JSToNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSToNative-Bridging-Header.h"; sourceTree = "<group>"; };
+		8F077A5E22B787F8002175AC /* WebViewJSBridgeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewJSBridgeController.swift; sourceTree = "<group>"; };
 		8F1025B422ACE214006C201B /* JSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSManager.swift; sourceTree = "<group>"; };
 		8F1025C022ACEAEE006C201B /* Resouce */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resouce; sourceTree = "<group>"; };
 		8F1025C222ACF345006C201B /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -60,6 +71,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F077A5122B78452002175AC /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				8F077A5222B78452002175AC /* WebViewJavascriptBridgeBase.m */,
+				8F077A5322B78452002175AC /* WKWebViewJavascriptBridge.m */,
+				8F077A5422B78452002175AC /* WebViewJavascriptBridge.m */,
+				8F077A5522B78452002175AC /* WebViewJavascriptBridge_JS.h */,
+				8F077A5622B78452002175AC /* WebViewJavascriptBridgeBase.h */,
+				8F077A5722B78452002175AC /* WebViewJavascriptBridge_JS.m */,
+				8F077A5822B78452002175AC /* WebViewJavascriptBridge.h */,
+				8F077A5922B78452002175AC /* WKWebViewJavascriptBridge.h */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
+		8F077A5A22B786F9002175AC /* JSBridge */ = {
+			isa = PBXGroup;
+			children = (
+				8F077A5122B78452002175AC /* WebViewJavascriptBridge */,
+				8F077A5B22B78717002175AC /* JSToNative-Bridging-Header.h */,
+			);
+			path = JSBridge;
+			sourceTree = "<group>";
+		};
 		8F1025C622ACFCD3006C201B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +102,7 @@
 				8F7EBB0422ACD7D1004542A0 /* HomeController.swift */,
 				8F48CEF722AE0D4E0042FC63 /* JavaScriptCoreController.swift */,
 				8F74EBE222AFC18200C33407 /* MessageHandlerController.swift */,
+				8F077A5E22B787F8002175AC /* WebViewJSBridgeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -112,6 +148,7 @@
 		8F7EBB0122ACD7D1004542A0 /* JSToNative */ = {
 			isa = PBXGroup;
 			children = (
+				8F077A5A22B786F9002175AC /* JSBridge */,
 				8F1025CA22AD3BC5006C201B /* Utils */,
 				8F1025C722ACFCF1006C201B /* View */,
 				8F7EBB1722ACD7E9004542A0 /* Support Files */,
@@ -184,6 +221,7 @@
 				TargetAttributes = {
 					8F7EBAFE22ACD7D1004542A0 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -230,12 +268,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JSToNative/Pods-JSToNative-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -272,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1025CC22AD3BD9006C201B /* AlertUtil.swift in Sources */,
+				8F077A5F22B787F8002175AC /* WebViewJSBridgeController.swift in Sources */,
 				8FB0C9EB22AE672200ACCDBC /* DecodeUtil.swift in Sources */,
 				8F74EBE322AFC18200C33407 /* MessageHandlerController.swift in Sources */,
 				8F1025C322ACF345006C201B /* HomeCell.swift in Sources */,
@@ -428,6 +469,7 @@
 			baseConfigurationReference = 1286242F3B430A6F8C70677E /* Pods-JSToNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = JSToNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -436,8 +478,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ping.JSToNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSToNative/JSBridge/JSToNative-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Debug;
 		};
@@ -446,6 +491,7 @@
 			baseConfigurationReference = 14E5B14370CC12327310C4A0 /* Pods-JSToNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = JSToNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -454,8 +500,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ping.JSToNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSToNative/JSBridge/JSToNative-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;
 		};

@@ -7,5 +7,6 @@ target 'JSToNative' do
 
   # Pods for JSToNative
   pod 'SnapKit'
+  pod 'WebViewJavascriptBridge'
 
 end
